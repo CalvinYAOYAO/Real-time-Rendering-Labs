@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Yongyao Huang Lab2</title>
+
+<!--  ************** Fragment Shader ************* --> 
+<script id="shader-fs" type="x-shader/x-fragment">
+    precision mediump float;
+    uniform vec3 u_color;
+
+    void main(void) {
+        gl_FragColor = vec4(u_color, 1.0); // set all fragments to red
+    }
+</script>
+<!--  ************** Vertex Shader ************* --> 
+<script id="shader-vs" type="x-shader/x-vertex">
+    attribute vec3 aVertexPosition;
+    attribute vec3 aVertexColor;
+
+    uniform mat4 uMVMatrix;
+
+
+    void main(void) {
+        gl_Position = uMVMatrix*vec4(aVertexPosition, 1.0);  // by pass the vertex coordinates; all need to be in [-1,-1] to be vislble 
+        gl_PointSize = 2.0;
+        
+    }
+</script>
+
+<script src="./gl_matrix/gl-matrix.js"></script>
+</head>
+
+<body onload="webGLStart();">
+
+    <canvas id="canvas" width="500" height="500"></canvas>
+    
+    <script type="text/javascript" src="shaders_setup.js"></script>
+
+    <script type="text/javascript" src="app.js"></script>
+
+    
+    
+</body>
+
+
+
+</html>

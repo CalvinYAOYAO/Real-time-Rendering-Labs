@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title>Yongyao Huang Lab3</title>
+
+<!--  ************** Fragment Shader ************* --> 
+<script id="shader-fs" type="x-shader/x-fragment">
+    precision mediump float;
+    uniform vec3 u_color;
+
+    void main(void) {
+        gl_FragColor = vec4(u_color, 1); // set all fragments to red
+    }
+</script>
+<!--  ************** Vertex Shader ************* --> 
+<script id="shader-vs" type="x-shader/x-vertex">
+    attribute vec3 aVertexPosition;
+    attribute vec3 aVertexColor;
+
+    uniform mat4 uMMatrix;
+    uniform mat4 uVMatrix;
+    uniform mat4 uPMatrix;
+
+    void main(void) {
+        gl_Position = uPMatrix*uVMatrix*uMMatrix*vec4(aVertexPosition, 1.0);  // by pass the vertex coordinates; all need to be in [-1,-1] to be vislble 
+        gl_PointSize = 2.0;
+        
+    }
+</script>
+
+<script src="./gl_matrix/gl-matrix.js"></script>
+</head>
+
+<body onload="webGLStart();">
+
+    <canvas id="canvas" width="500" height="500"></canvas>
+
+    <script type="text/javascript" src="app.js"></script>
+
+    <h4> set Tier:</h4>
+    <h5>Tier1 includes Cube, Cylinder and Sphere</h5>
+    <h5>Tier2 includes Cylinder, Sphere</h5>
+    <h5>Tier3 includes Sphere</h5>
+    <button  onclick="setTier(1)"> Tier1</button>
+    <button  onclick="setTier(2)"> Tier2</button>
+    <button  onclick="setTier(3)"> Tier3</button>
+
+    
+</body>
+
+
+
+</html>
